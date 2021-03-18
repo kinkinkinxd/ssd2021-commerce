@@ -1,20 +1,11 @@
 class CommercesController < ApplicationController
   
-
-  before_action :authenticate_admin!
   def index
     @search = params[:search]
     @commerces = Commerce.all
     @commerces = @commerces.where("title LIKE ? or description LIKE ?" , "%#{@search}%", "%#{@search}%") if @search.present?
     @commerces = @commerces.page(params[:page]).per(5)
   end
-
-  # def admin
-  #   @search = params[:search]
-  #   @commerces = Commerce.all
-  #   @commerces = @commerces.where("title LIKE ? or body LIKE ?" , "%#{@search}%", "%#{@search}%") if @search.present?
-  #   @commerces = @commerces.page(params[:page]).per(5)
-  # end
 
   def show
     @commerce = Commerce.find(params[:id])

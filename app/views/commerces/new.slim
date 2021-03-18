@@ -1,5 +1,6 @@
 h1 Add new stock
 
-div = link_to 'Back', commerces_path
+div = link_to commerces_path do
+        = button_tag 'Back', class: 'btn btn-primary'
 br
 = render 'form', commerce: @commerce
