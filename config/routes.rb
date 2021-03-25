@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'commerces#index'
+  resources :categories
+  root to: 'products#index'
   devise_for :admin
-  resources :commerces
+  resources :products
 end

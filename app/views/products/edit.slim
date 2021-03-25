@@ -1,7 +1,7 @@
 h1 Edit stock
 
-div = link_to commerces_path do
+div = link_to products_path do
         = button_tag 'Back', class: 'btn btn-primary'
 
 br
-= render 'form', commerce: @commerce
+= render 'form', product: @product

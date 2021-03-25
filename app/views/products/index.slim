@@ -6,12 +6,12 @@
             .col-6
                 .float-right
                     span = current_admin.email
-                    / span.ml-3 = "#{current_admin.firstname} #{current_admin.lastname}"
+                    span = link_to "Catagory", categories_path, class:"nav-link"
                     span.ml-3 = link_to 'Logout', destroy_admin_session_path,  method: :delete 
 
         .row
             .col
-                = form_tag commerces_path, method: :get do
+                = form_tag products_path, method: :get do
                     = text_field_tag 'search', '', placeholder: 'Type something here',
                         class: 'form-control'
         br
@@ -28,7 +28,7 @@
                             th Updated at
                             th Action
                     tbody
-                      - @commerces.each do |a|
+                      - @products.each do |a|
                         tr
                             td = a.id
                             td.font-weight-bold = a.title
@@ -38,21 +38,21 @@
                             td.font-weight-light = "#{time_ago_in_words(a.updated_at.to_date)} Ago"
                         td
                             span.mr-3
-                                = link_to commerce_path(a) do
+                                = link_to product_path(a) do
                                     i.fas.fa-eye
                             span.mr-2
-                                = link_to edit_commerce_path(a) do
+                                = link_to edit_product_path(a) do
                                     i.fas.fa-pen
                             span.mr-2
-                                = link_to commerce_path(a), method: :delete do
+                                = link_to product_path(a), method: :delete do
                                     i.fas.fa-trash
 
     .row
         .col-6
-            = paginate @commerces
+            = paginate @products
         .col
             .float-right
-                = link_to new_commerce_path do
+                = link_to new_product_path do
                     = button_tag 'Add new item', class: 'btn btn-primary'
 
 - else
@@ -66,7 +66,7 @@
                 
         .row
             .col
-                = form_tag commerces_path, method: :get do
+                = form_tag products_path, method: :get do
                     = text_field_tag 'search', '', placeholder: 'Type something here',
                         class: 'form-control'
         br
@@ -80,7 +80,7 @@
                             th Description
                             th Stock
                     tbody
-                      - @commerces.each do |a|
+                      - @products.each do |a|
                         tr
                             td = a.id
                             td.font-weight-bold = a.title
@@ -89,4 +89,4 @@
 
         .row
             .col-6
-                = paginate @commerces
+                = paginate @products
