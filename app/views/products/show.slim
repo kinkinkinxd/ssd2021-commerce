@@ -1,8 +1,13 @@
 h1 = @product.title
 div = link_to products_path do
         = button_tag 'Back', class: 'btn btn-primary'
-hr
-div = @product.description
-div = @product.stock
-hr
+.form-control
+   strong Description
+   br
+   = @product.description
+   br
+   strong Category
+   br
+   = render @product.categories
+
 

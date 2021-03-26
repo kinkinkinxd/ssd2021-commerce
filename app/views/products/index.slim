@@ -24,6 +24,7 @@
                             th Title
                             th Description
                             th Stock
+                            th Category
                             th Created at
                             th Updated at
                             th Action
@@ -34,18 +35,19 @@
                             td.font-weight-bold = a.title
                             td = a.description
                             td = a.stock
+                            td = render a.categories
                             td.font-weight-light = "#{time_ago_in_words(a.created_at.to_date)} Ago"
                             td.font-weight-light = "#{time_ago_in_words(a.updated_at.to_date)} Ago"
-                        td
-                            span.mr-3
-                                = link_to product_path(a) do
-                                    i.fas.fa-eye
-                            span.mr-2
-                                = link_to edit_product_path(a) do
-                                    i.fas.fa-pen
-                            span.mr-2
-                                = link_to product_path(a), method: :delete do
-                                    i.fas.fa-trash
+                            td
+                                span.mr-3
+                                    = link_to product_path(a) do
+                                        i.fas.fa-eye
+                                span.mr-2
+                                    = link_to edit_product_path(a) do
+                                        i.fas.fa-pen
+                                span.mr-2
+                                    = link_to product_path(a), method: :delete do
+                                        i.fas.fa-trash
 
     .row
         .col-6

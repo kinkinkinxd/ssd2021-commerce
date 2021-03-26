@@ -3,6 +3,6 @@ class Product < ApplicationRecord
     validates :title, length: {minimum: 1 }
     validates :description, length: {minimum: 1}
 
-    has_many :categoties_products
-    has_many :categoties, through: :categoties_products
+    has_many :categories_products
+    has_many :categories, through: :categories_products
 end
