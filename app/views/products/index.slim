@@ -81,6 +81,7 @@
                             th Title
                             th Description
                             th Stock
+                            th Category
                     tbody
                       - @products.each do |a|
                         tr
@@ -88,6 +89,7 @@
                             td.font-weight-bold = a.title
                             td = a.description
                             td = a.stock
+                            td = render a.categories
 
         .row
             .col-6
