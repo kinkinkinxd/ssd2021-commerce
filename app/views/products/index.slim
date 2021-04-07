@@ -14,6 +14,9 @@
                 = form_tag products_path, method: :get do
                     = text_field_tag 'search', '', placeholder: 'Type something here',
                         class: 'form-control'
+            .col-2
+                = link_to products_path(format: :csv) do
+                    = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
         br
         .row-mt-2
             .col
@@ -22,6 +25,7 @@
                         tr
                             th ID
                             th Title
+                            th Status
                             th Description
                             th Stock
                             th Category
@@ -33,6 +37,7 @@
                         tr
                             td = a.id
                             td.font-weight-bold = a.title
+                            td.font-weight-light = a.status
                             td = a.description
                             td = a.stock
                             td = render a.categories
@@ -56,6 +61,11 @@
             .float-right
                 = link_to new_product_path do
                     = button_tag 'Add new item', class: 'btn btn-primary'
+    .row
+        .col
+            = form_tag products_csv_upload_path, multipart: true do
+                div = file_field_tag :csv_file
+                div = submit_tag :upload
 
 - else
     .container
@@ -79,6 +89,7 @@
                         tr
                             th ID
                             th Title
+                            th Status
                             th Description
                             th Stock
                             th Category
@@ -86,7 +97,9 @@
                       - @products.each do |a|
                         tr
                             td = a.id
+
                             td.font-weight-bold = a.title
+                            td.font-weight-light = a.status
                             td = a.description
                             td = a.stock
                             td = render a.categories

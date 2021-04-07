@@ -11,4 +11,7 @@
     = f.label :categories
     = f.collection_select :category_ids, Category.order(:name), :id, :name, {}, multiple: true
     br
+    = f.label :status
+    = f.select :status, Product.statuses.keys.map {|u| [u.titleize, u]}
+    br
     = f.submit 'Submit stock'

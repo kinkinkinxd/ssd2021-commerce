@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+# For page caching
+gem 'actionpack-page_caching'
 # Use number in form
 gem 'allow_numeric'
 # For pagination
