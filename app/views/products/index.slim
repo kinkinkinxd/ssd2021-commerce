@@ -23,7 +23,6 @@
                 table.table.table-bordered.table-striped
                     thead.thead-dark
                         tr
-                            th ID
                             th Title
                             th Status
                             th Description
@@ -35,7 +34,6 @@
                     tbody
                       - @products.each do |a|
                         tr
-                            td = a.id
                             td.font-weight-bold = a.title
                             td.font-weight-light = a.status
                             td = a.description
@@ -87,7 +85,6 @@
                 table.table.table-bordered.table-striped
                     thead.thead-dark
                         tr
-                            th ID
                             th Title
                             th Status
                             th Description
@@ -96,8 +93,6 @@
                     tbody
                       - @products.each do |a|
                         tr
-                            td = a.id
-
                             td.font-weight-bold = a.title
                             td.font-weight-light = a.status
                             td = a.description
