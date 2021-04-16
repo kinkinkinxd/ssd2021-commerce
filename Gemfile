@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
-
+# For filtering file type
+gem 'active_storage_validations'
 # For page caching
 gem 'actionpack-page_caching'
 # Use number in form
@@ -34,6 +35,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

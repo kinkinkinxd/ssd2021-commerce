@@ -49,9 +49,6 @@ module Admins
       redirect_to action: :index
     end
 
-    def remove_image
-      @product.cover_image.purge
-    end
 
     def csv_upload
       data = params[:csv_file].read.split("\n")
@@ -73,7 +70,7 @@ module Admins
     end
 
     def product_params
-      params.require(:product).permit(:title, :status, :description, :stock, :cover_image, category_ids: [], images: [])
+      params.require(:product).permit(:title, :status, :description, :stock, :cover_image, :primary_image, :remove_cover_image, :remove_images, category_ids: [], images: [])
     end
   end
 end

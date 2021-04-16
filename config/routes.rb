@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :products
     namespace :products do
+      delete 'remove_cover_image'
       post 'csv_upload'
     end
   end
