@@ -1,0 +1,30 @@
+h1 = @product.title
+.form-control
+   strong Description
+   br
+   = @product.description
+   br
+   strong Stock : 
+   = @product.stock 
+   br
+   strong Category
+   br
+   li.category-link
+      - @product.categories.each do |category|
+         = link_to category do 
+            = category.name
+   br
+   strong Cover image
+   br
+      - if @product.cover_image.attached?
+         = image_tag @product.cover_image, width: '64px'
+   br
+   strong Images
+   br
+   - if @product.images.attached?
+      - @product.images.each do |image|
+         = image_tag image, width: '32px'
+   br
+br
+div = link_to admins_products_path do
+      = button_tag 'Back', class: 'btn btn-primary'

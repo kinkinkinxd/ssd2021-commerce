@@ -1,0 +1,37 @@
+= form_with(model: [:admins, product]) do |f|
+    = f.label :title
+    = f.text_field :title, placeholder: 'Title'
+    br
+    = f.label :description
+    = f.text_area :description, placeholder: 'Write description here'
+    br
+    = f.label :stock
+    = f.text_field :stock, data: { numeric: true } 
+    br
+    = f.label :cover_image
+    = f.file_field :cover_image
+    - if product.cover_image.attached?
+        br 
+        = image_tag product.cover_image, width: '64px'
+        br
+        = f.label :remove_cover_image
+        = f.check_box(:remove_cover_image)
+    br
+    = f.label :images
+    = f.file_field :images, multiple: true
+    br
+    - if product.images.attached?
+        br
+        - product.images.each do |image|
+            = image_tag image, width: '64px'
+        br
+        = f.label :remove_images
+        = f.check_box(:remove_images)
+    br
+    = f.label :categories
+    = f.collection_select :category_ids, Category.order(:name), :id, :name, {}, multiple: true
+    br
+    = f.label :status
+    = f.select :status, Product.statuses.keys.map {|u| [u.titleize, u]}
+    br
+    = f.submit 'Submit stock'

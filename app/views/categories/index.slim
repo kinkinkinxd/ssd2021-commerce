@@ -2,5 +2,5 @@ h1 Categories
 .container
     = render @categories
     = link_to 'New Category', new_category_path, class: 'btn btn-primary'
-= link_to products_path do
+= link_to admins_products_path do
     = button_tag 'Back', class: 'btn btn-primary'

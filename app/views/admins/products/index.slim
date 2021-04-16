@@ -1,21 +1,22 @@
-- if signed_in?
+- if admin_signed_in?
     .container
         .row
             .col-6  
                 h1 List of stock
             .col-6
                 .float-right
-                    span = current_admin.email
-                    span = link_to "Catagory", categories_path, class:"nav-link"
-                    span.ml-3 = link_to 'Logout', destroy_admin_session_path,  method: :delete 
+                    - if admin_signed_in?
+                        span = current_admin.email
+                        span = link_to "Catagory", categories_path, class:"nav-link"
+                        span.ml-3 = link_to 'Logout', destroy_admin_session_path,  method: :delete 
 
         .row
             .col
-                = form_tag products_path, method: :get do
+                = form_tag root_path, method: :get do
                     = text_field_tag 'search', '', placeholder: 'Type something here',
                         class: 'form-control'
             .col-2
-                = link_to products_path(format: :csv) do
+                = link_to admins_products_path(format: :csv) do
                     = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
         br
         .row-mt-2
@@ -23,33 +24,44 @@
                 table.table.table-bordered.table-striped
                     thead.thead-dark
                         tr
+                            th Cover image
                             th Title
                             th Status
+                            th Category
                             th Description
                             th Stock
-                            th Category
+                            th images
                             th Created at
                             th Updated at
                             th Action
                     tbody
                       - @products.each do |a|
                         tr
+                            td
+                                - if a.cover_image.attached?
+                                    = image_tag a.cover_image, width: '64px'
                             td.font-weight-bold = a.title
                             td.font-weight-light = a.status
+                            td 
+                                - a.categories.each do |category|
+                                    = link_to category do 
+                                        = category.name
                             td = a.description
                             td = a.stock
-                            td = render a.categories
+                            td  
+                                -  a.images.each do |image|
+                                    = image_tag image, width: '32px'
                             td.font-weight-light = "#{time_ago_in_words(a.created_at.to_date)} Ago"
                             td.font-weight-light = "#{time_ago_in_words(a.updated_at.to_date)} Ago"
                             td
                                 span.mr-3
-                                    = link_to product_path(a) do
+                                    = link_to admins_product_path(a) do
                                         i.fas.fa-eye
                                 span.mr-2
-                                    = link_to edit_product_path(a) do
+                                    = link_to edit_admins_product_path(a) do
                                         i.fas.fa-pen
                                 span.mr-2
-                                    = link_to product_path(a), method: :delete do
+                                    = link_to admins_product_path(a), method: :delete do
                                         i.fas.fa-trash
 
     .row
@@ -57,15 +69,15 @@
             = paginate @products
         .col
             .float-right
-                = link_to new_product_path do
+                = link_to new_admins_product_path do
                     = button_tag 'Add new item', class: 'btn btn-primary'
     .row
         .col
-            = form_tag products_csv_upload_path, multipart: true do
+            = form_tag admins_products_csv_upload_path, multipart: true do
                 div = file_field_tag :csv_file
                 div = submit_tag :upload
 
-- else
+- if not admin_signed_in?
     .container
         .row
             .col-6  
@@ -76,7 +88,7 @@
                 
         .row
             .col
-                = form_tag products_path, method: :get do
+                = form_tag root_path, method: :get do
                     = text_field_tag 'search', '', placeholder: 'Type something here',
                         class: 'form-control'
         br
@@ -85,19 +97,30 @@
                 table.table.table-bordered.table-striped
                     thead.thead-dark
                         tr
+                            th Cover image
                             th Title
                             th Status
                             th Description
                             th Stock
+                            th images
                             th Category
                     tbody
                       - @products.each do |a|
                         tr
+                            td
+                                - if a.cover_image.attached?
+                                    = image_tag a.cover_image, width: '64px'
                             td.font-weight-bold = a.title
                             td.font-weight-light = a.status
                             td = a.description
                             td = a.stock
-                            td = render a.categories
+                            td  
+                                -  a.images.each do |image|
+                                    = image_tag image, width: '32px'
+                            td 
+                                - a.categories.each do |category|
+                                    = link_to category do 
+                                        = category.name
 
         .row
             .col-6

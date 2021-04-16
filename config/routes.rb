@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :categories
-  root to: 'products#index'
   devise_for :admin
-  resources :products
-  namespace :products do
-    post 'csv_upload'
+  resources :categories
+  namespace :admins do
+    resources :products
+    namespace :products do
+      post 'csv_upload'
+    end
   end
+  root to: 'admins/products#index'
 end
