@@ -1,7 +1,7 @@
 .container
     .row
         .col-6  
-            h1 Category list
+            h1 Order list
         .col-6
             .float-right
                 span = link_to "Product", admins_products_path,class:"nav-link"
@@ -13,8 +13,15 @@
                 - else
                     = link_to admin_session_path do
                         = button_tag 'Login', class: 'btn btn-primary'
-.container
-    = render @categories
-    = link_to 'New Category', new_category_path, class: 'btn btn-primary'
-= link_to admins_products_path do
-    = button_tag 'Back', class: 'btn btn-primary'
+
+- @orders.each do |order|
+    .col-3
+        - if Product.find(order.product_id).cover_image.attached?
+            = image_tag  Product.find(order.product_id).cover_image, width: '100%'
+    .col-9
+        .row
+            .col
+                h1 =  Product.find(order.product_id).title
+          
+                .col
+                  =  "address: #{order.address}"
